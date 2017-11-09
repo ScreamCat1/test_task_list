@@ -1,7 +1,29 @@
 import React from 'react';
+import axios from 'axios';
+
+const addTask = (e) => {
+  e.preventDefault();
+  const form = new FormData();
+  form.append('username', 'Pushkarov');
+  form.append('email', 'pushmaks@gmail.com');
+  form.append('text', 'Some text 4');
+  form.append('image', document.getElementById('exampleFormControlFile1').files[0]);
+  console.log(document.getElementById('exampleFormControlFile1').files[0]);
+  axios({
+    url: 'https://uxcandy.com/~shapoval/test-task-backend/create?developer=Maksym',
+    crossDomain: true,
+    method: 'POST',
+    mimeType: 'multipart/form-data',
+    contentType: false,
+    processData: false,
+    data: form,
+    dataType: 'json',
+
+  }).then(({ data: { message } }) => console.log(message));
+};
 
 const Form = () => (
-  <form>
+  <form encType="multipart/form-data">
     <div className="form-group">
       <label htmlFor="form-group-name">Введите Ваше имя</label>
       <input
@@ -38,7 +60,7 @@ const Form = () => (
         id="exampleFormControlFile1"
       />
     </div>
-    <button type="submit" className="btn btn-primary">Submit</button>
+    <button type="submit" className="btn btn-primary" onClick={addTask}>Submit</button>
   </form>
 );
 
