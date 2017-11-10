@@ -6,7 +6,7 @@ const addTask = (e) => {
   const form = new FormData();
   form.append('username', 'Pushkarov');
   form.append('email', 'pushmaks@gmail.com');
-  form.append('text', 'Some text 4');
+  form.append('text', 'Some text 5');
   form.append('image', document.getElementById('exampleFormControlFile1').files[0]);
   console.log(document.getElementById('exampleFormControlFile1').files[0]);
   axios({
