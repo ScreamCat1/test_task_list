@@ -6,6 +6,7 @@ import Cards from './components/Cards';
 import Form from './components/Form';
 import Navigation from './components/Navigation';
 import Login from './components/Login';
+import Edit from './components/Edit';
 
 const App = () => (
   <Router>
@@ -24,8 +25,13 @@ const App = () => (
         />
         <Route
           exact
-          path="login"
+          path="/login"
           component={Login}
+        />
+        <Route
+          exact
+          path="/edit"
+          component={Edit}
         />
       </Switch>
     </div>

@@ -4,6 +4,10 @@ object-fit: contain;
 object-position: left;
 }
 
+.modal {
+  overflow-y: scroll;
+}
+
 // form {
 // position: fixed;
 // right: 10%;

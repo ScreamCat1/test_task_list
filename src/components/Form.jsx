@@ -1,67 +1,110 @@
-import React from 'react';
-import axios from 'axios';
+import React, { Component } from 'react';
+import { setNewTask } from '../actions/actions';
+import ModalWindow from './ModalWindow';
+import { defaultFormState } from '../constants/';
 
-const addTask = (e) => {
-  e.preventDefault();
-  const form = new FormData();
-  form.append('username', 'Pushkarov');
-  form.append('email', 'pushmaks@gmail.com');
-  form.append('text', 'Some text 5');
-  form.append('image', document.getElementById('exampleFormControlFile1').files[0]);
-  console.log(document.getElementById('exampleFormControlFile1').files[0]);
-  axios({
-    url: 'https://uxcandy.com/~shapoval/test-task-backend/create?developer=Maksym',
-    crossDomain: true,
-    method: 'POST',
-    mimeType: 'multipart/form-data',
-    contentType: false,
-    processData: false,
-    data: form,
-    dataType: 'json',
+class Form extends Component {
+  constructor(prop) {
+    super(prop);
+    this.state = defaultFormState;
+  }
 
-  }).then(({ data: { message } }) => console.log(message));
-};
+  onChangeField = ({ target: { value, id } }) => {
+    this.setState(prevState => ({
+      ...prevState, [id]: value,
+    }));
+  }
 
-const Form = () => (
-  <form encType="multipart/form-data">
-    <div className="form-group">
-      <label htmlFor="form-group-name">Введите Ваше имя</label>
-      <input
-        type="text"
-        className="form-control"
-        id="form-group-name"
-        placeholder="Ваше имя"
-      />
-    </div>
-    <div className="form-group">
-      <label htmlFor="form-group-email">Введите Ваш email</label>
-      <input
-        type="email"
-        className="form-control"
-        id="form-group-email"
-        aria-describedby="emailHelp"
-        placeholder="Ваш email"
-      />
-    </div>
-    <div className="form-group">
-      <label htmlFor="exampleFormControlTextarea1">Введите текст задачи</label>
-      <textarea
-        className="form-control"
-        id="form-group-task"
-        rows="3"
-        placeholder="Текст задачи"
-      />
-    </div>
-    <div className="form-group">
-      <label htmlFor="exampleFormControlFile1">Выберите картинку</label>
-      <input
-        type="file"
-        className="form-control-file"
-        id="exampleFormControlFile1"
-      />
-    </div>
-    <button type="submit" className="btn btn-primary" onClick={addTask}>Submit</button>
-  </form>
-);
+  addTask = (e) => {
+    e.preventDefault();
+    const file = document.getElementById('file').files[0];
+    const { username, email, text } = this.state;
+    const form = new FormData();
+    form.append('username', username);
+    form.append('email', email);
+    form.append('text', text);
+    form.append('image', file);
+    setNewTask(form);
+    this.toggleModal();
+    this.setState(defaultFormState);
+  };
+
+  toggleModal = () => (this.setState(prevState => (
+    {
+      ...prevState,
+      isModalOpen: !prevState.isModalOpen,
+    })))
+  render() {
+    const { username, email, file, text, isModalOpen } = this.state;
+    return (
+      <div>
+        <form encType="multipart/form-data" onSubmit={this.addTask}>
+          <div className="form-group">
+            <label htmlFor="username">Введите Ваше имя</label>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              placeholder="Ваше имя"
+              value={username}
+              onChange={this.onChangeField}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Введите Ваш email</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              aria-describedby="emailHelp"
+              placeholder="Ваш email"
+              value={email}
+              onChange={this.onChangeField}
+            />
+          </div>
+          <div className="form-group">
+            <label
+              htmlFor="text"
+            >
+          Введите текст задачи
+            </label>
+            <textarea
+              className="form-control"
+              id="text"
+              rows="3"
+              placeholder="Текст задачи"
+              value={text}
+              onChange={this.onChangeField}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="file">Выберите картинку</label>
+            <input
+              type="file"
+              className="form-control-file"
+              id="file"
+              value={file}
+              onChange={this.onChangeField}
+            />
+          </div>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={this.toggleModal}
+          >
+        Submit
+          </button>
+        </form>
+        {isModalOpen &&
+          <ModalWindow
+            data={[username, email, text, email]}
+            toggleModal={this.toggleModal}
+            addTask={this.addTask}
+          />}
+      </div>
+    );
+  }
+}
 
 export default Form;
