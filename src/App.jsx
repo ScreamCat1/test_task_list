@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './scss/main.scss';
-import Cards from './components/Cards';
+import Cards from './containers/Cards';
 import Form from './components/Form';
 import Navigation from './components/Navigation';
-import Login from './components/Login';
+import Login from './containers/Login';
 import Edit from './components/Edit';
 
 const App = () => (

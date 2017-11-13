@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import md5 from 'js-md5';
+
 import { updateTask } from '../actions/actions';
 
 class Edit extends Component {
