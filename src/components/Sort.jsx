@@ -1,5 +1,8 @@
 import React from 'react';
+<<<<<<< HEAD
 import PropTypes from 'prop-types';
+=======
+>>>>>>> 58775b3e4f1318fa31ba1e7b7c5b7bab4a264d19
 
 const Sort = ({ sortTasks }) => (
   <div className="btn-group" role="group" aria-label="Basic example">
@@ -30,6 +33,7 @@ const Sort = ({ sortTasks }) => (
   </div>
 );
 
+<<<<<<< HEAD
 Sort.propTypes = {
   sortTasks: PropTypes.func,
 };
@@ -39,3 +43,7 @@ Sort.defaultProps = {
 };
 
 export default Sort;
+=======
+export default Sort;
+
+>>>>>>> 58775b3e4f1318fa31ba1e7b7c5b7bab4a264d19

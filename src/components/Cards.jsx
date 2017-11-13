@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import PropTypes from 'prop-types';
+=======
+
+>>>>>>> 58775b3e4f1318fa31ba1e7b7c5b7bab4a264d19
 import { connect } from 'react-redux';
 
 import Pagination from './Pagination';
@@ -86,6 +90,7 @@ class Cards extends Component {
   }
 }
 
+<<<<<<< HEAD
 const mapStateToProps =
 ({ tasks: { tasks, totalTaskCount }, autorized }) => (
   {
@@ -104,3 +109,12 @@ Cards.propTypes = {
 };
 
 export default connect(mapStateToProps, { setTasks, sortTasks, setTask })(Cards);
+=======
+const mapStateToProps = ({ tasks: { tasks, totalTaskCount } }) => (
+  {
+    tasks,
+    totalTaskCount,
+  });
+
+export default connect(mapStateToProps, { setTasks, sortTasks })(Cards);
+>>>>>>> 58775b3e4f1318fa31ba1e7b7c5b7bab4a264d19

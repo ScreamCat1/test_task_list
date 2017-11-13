@@ -3,10 +3,7 @@ import axios from 'axios';
 export const sortTasks = data => ({ type: 'SORT_TASKS', payload: data });
 
 export const setTasks = page => (dispatch) => {
-  let currentPage = '';
-  if (page) {
-    currentPage = `&page=${page}`;
-  }
+  let currentPage  `&page=${page}`;
   axios
     .get(`https://uxcandy.com/~shapoval/test-task-backend?developer=Maksym${currentPage}`,
       {
