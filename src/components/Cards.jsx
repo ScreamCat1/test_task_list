@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import PropTypes from 'prop-types';
-=======
-
->>>>>>> 58775b3e4f1318fa31ba1e7b7c5b7bab4a264d19
 import { connect } from 'react-redux';
 
 import Pagination from './Pagination';
@@ -53,9 +49,10 @@ class Cards extends Component {
     default:
       page = +innerHTML;
     }
-    this.setState(prevState => ({ ...prevState, currentPage: page }), function () { return set(this.state.currentPage); });
-    // return false;
-  }
+    this.setState(prevState => (
+      { ...prevState, currentPage: page }),
+    () => (set(this.state.currentPage)));
+  };
 
   sortTasks = ({ target: { dataset: { field } } }) => {
     if (field) {
@@ -65,12 +62,12 @@ class Cards extends Component {
       direction = direction === '' ? 'asc' : '';
       this.setState({ [field]: direction });
     }
-  }
+  };
 
   editTask = ({ target: { dataset: { id } } }) => {
     const { tasks, setTask: set } = this.props;
     set({ id, tasks });
-  }
+  };
 
   render() {
     const { tasks, totalTaskCount, autorized } = this.props;
@@ -90,7 +87,6 @@ class Cards extends Component {
   }
 }
 
-<<<<<<< HEAD
 const mapStateToProps =
 ({ tasks: { tasks, totalTaskCount }, autorized }) => (
   {
@@ -108,13 +104,8 @@ Cards.propTypes = {
   autorized: PropTypes.bool.isRequired,
 };
 
-export default connect(mapStateToProps, { setTasks, sortTasks, setTask })(Cards);
-=======
-const mapStateToProps = ({ tasks: { tasks, totalTaskCount } }) => (
-  {
-    tasks,
-    totalTaskCount,
-  });
+export default connect(
+  mapStateToProps,
+  { setTasks, sortTasks, setTask },
+)(Cards);
 
-export default connect(mapStateToProps, { setTasks, sortTasks })(Cards);
->>>>>>> 58775b3e4f1318fa31ba1e7b7c5b7bab4a264d19

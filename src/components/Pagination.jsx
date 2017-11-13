@@ -18,6 +18,7 @@ const Pagination = ({ totalTaskCount, paginationPages }) => (
   <nav
     aria-label="Page navigation example"
     onClick={paginationPages}
+    role="presentation"
   >
     <ul className="pagination">
       <li className="page-item">

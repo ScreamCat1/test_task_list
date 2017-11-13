@@ -1,11 +1,13 @@
 import axios from 'axios';
 
+import { url, create } from '../constants';
+
 export const sortTasks = data => ({ type: 'SORT_TASKS', payload: data });
 
 export const setTasks = page => (dispatch) => {
-  let currentPage  `&page=${page}`;
+  const currentPage = `&page=${page}`;
   axios
-    .get(`https://uxcandy.com/~shapoval/test-task-backend?developer=Maksym${currentPage}`,
+    .get(`${url}${currentPage}`,
       {
         headers: { 'Access-Control-Allow-Origin': '*' },
       }).then((
@@ -29,8 +31,7 @@ export const setTask = data => ({ type: 'SET_TASK', payload: data });
 
 export const setNewTask = (data) => {
   axios({
-    url:
-    'https://uxcandy.com/~shapoval/test-task-backend/create?developer=Maksym',
+    url: create,
     crossDomain: true,
     method: 'POST',
     mimeType: 'multipart/form-data',
@@ -39,7 +40,20 @@ export const setNewTask = (data) => {
     data,
     dataType: 'json',
 
-  }).then(() => setTasks);
+  }).then(resp => console.log(resp, 'tut'));
+};
+
+export const updateTask = ({ id, data }) => {
+  axios({
+    url: `https://uxcandy.com/~shapoval/test-task-backend/edit/:${id}?developer=Maksym`,
+    crossDomain: true,
+    method: 'POST',
+    mimeType: 'multipart/form-data',
+    contentType: false,
+    processData: false,
+    data,
+    dataType: 'json',
+  }).then(({ data: { message } }) => console.log(message));
 };
 
 export const autorizeAdmin = data => ({ type: 'AUTORIZE', payload: data });
